@@ -7,6 +7,7 @@ main {
 
 }
 
-aside {
-    
+
+.bg-forecast-cards {
+    background-color: goldenrod !important;
 }
