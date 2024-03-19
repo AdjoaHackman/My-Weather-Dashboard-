@@ -40,13 +40,31 @@ $(document).ready(function () {
     function getWeatherApi(lat,lon) {
         var weatherURL = weatherAPI.replace("{lat}",lat);
         var weatherURL = weatherURL.replace("{lon}",lon);
-        alert(weatherURL)
+        // alert(weatherURL)
         $.ajax({ 
             url: weatherURL,
             method: 'GET',
             success: function(response) {
                 // Handle the API response here
                 console.log(response);
+                for (let index = 0; index < response.list.length; index+=8) {
+                    const forecast = response.list[index];
+                    console.log(forecast)
+                    let cardelement = document.createElement("div")
+                    cardelement.classList.add("card")
+                    let listelement = document.createElement("ul")
+                    listelement.classList.add("list-group","list-group-flush")
+                    let temperature = document.createElement("li")
+                    temperature.classList.add("list-group-item")
+                    temperature.textContent = forecast.main.temp
+                    let humidity = document.createElement("li")
+                    humidity.classList.add("list-group-item")
+                    humidity.textContent = forecast.main.humidity
+                    listelement.append(temperature,humidity)
+                    cardelement.append(listelement)
+                    document.querySelector(".forecast-cards").append(cardelement)
+                }
+                //created a for loop for the 5 day forecast. We are increasing by 8 because the array has 40 results and every 8 results is a different day of the week.
                 // alert(response)
                 var json = JSON.parse(JSON.stringify(response));
                 //we are parsing the response using jquery
@@ -62,6 +80,10 @@ $(document).ready(function () {
         });
         
     }
+    }
+    function displayForecast(lat,lon) {
+
+        
     }
 })
 // const APIkey = "43d3ce9a4d6be02e5f3dbc9ba49a17b0" 
