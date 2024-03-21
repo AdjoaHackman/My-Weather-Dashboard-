@@ -48,24 +48,29 @@ $(document).ready(function () {
                     console.log(response)
                     var singleDay = document.querySelector(".single-day")
                     let cardelement = document.createElement("div")
-                    cardelement.classList.add("card")
+                    cardelement.classList.add("card", "w-100")
                     singleDay.append(cardelement)
                     var dailyTemp = document.createElement("div")
                     dailyTemp.innerHTML = "Temp: " + Math.floor(response.main.temp) + "&deg;F"
                     cardelement.append(dailyTemp)
-                    let dailyWind = document.createElement("ul")
+                    let dailyWind = document.createElement("div")
                     cardelement.append(dailyWind)
                     dailyWind.textContent = "Wind: " + Math.floor(response.wind.speed) + " MPH"
-                    let dailyHumidity = document.createElement("ul")
+                    let dailyHumidity = document.createElement("div")
                     cardelement.append(dailyHumidity)
                     dailyHumidity.textContent = "Humidity: " + response.main.humidity + "%"
                     let dailyWeatherIcon = document.createElement("img")
                     dailyWeatherIcon.setAttribute("src",`https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
+                    dailyWeatherIcon.classList.add("daily-icon")
                     cardelement.prepend(dailyWeatherIcon)
-                    let dailyForecastDate = document.createElement("datetime")
+                    let dailyForecastDate = document.createElement("h6")
                     cardelement.prepend(dailyForecastDate)
-                    dailyForecastDate.textContent = response.dt
-                     
+                    var currentDate = new Date (response.dt * 1000)
+                    var currentMonth = currentDate.getMonth() +1
+                    var currentDay = currentDate.getDate()
+                    var currentYear = currentDate.getFullYear()
+                    dailyForecastDate.textContent = `${cityName} ${currentMonth}/${currentDay}/${currentYear}`
+                    //creating a string to display on the page. We are using the templates (back ticks) to create the string. Taught by my tutor
                 },
                 error: function(xhr, status, error) {
                     // Handle errors here
@@ -104,15 +109,21 @@ $(document).ready(function () {
                     document.querySelector(".forecast-cards").append(cardelement) 
                     let weatherIcon = document.createElement("img")
                     weatherIcon.setAttribute("src",`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`)
+                    weatherIcon.classList.add("forecast-icons")
                     cardelement.prepend(weatherIcon)
-                    let forecastDate = document.createElement("h3")
+                    let forecastDate = document.createElement("h5")
                     cardelement.prepend(forecastDate)
-                    forecastDate.textContent = forecast.dt_txt.split(" ")[0] 
-                    let weatherDescription = document.createElement("div")
-                    weatherDescription.textContent = forecast.weather[0].description
-                    // weatherDescription.setAttribute("div",`https://openweathermap.org/img/wn/${forecast.weather[0].description}@2x.png`)
-                    cardelement.append(weatherDescription)
-                }
+                    // forecastDate.textContent = forecast.dt_txt.split(" ")[0]
+                    var currentDate = new Date (forecast.dt * 1000)
+                    var currentMonth = currentDate.getMonth() +1
+                    var currentDay = currentDate.getDate()
+                    var currentYear = currentDate.getFullYear()
+                    forecastDate.textContent = `${currentMonth}/${currentDay}/${currentYear}`
+                //     let weatherDescription = document.createElement("div")
+                //     weatherDescription.textContent = forecast.weather[0].description
+                //     // weatherDescription.setAttribute("div",`https://openweathermap.org/img/wn/${forecast.weather[0].description}@2x.png`)
+                //     cardelement.append(weatherDescription)
+                // }
                 //created elements in the JS instead of the HTML for the card with the 5 day forecast. Including the element for the temp, humidity, as well as adding the link for the image for the icon (given by the API website). Also learned how to add the date that was included in the array and splitting it so that the time did not show up on the cards. 
                 //learned what prepend is - so I can put the icon and the date at the top of the forecast instead of moving the code around. 
                 //created a for loop for the 5 day forecast. We are increasing by 8 because the array has 40 results and every 8 results is a different day of the week.
@@ -123,7 +134,7 @@ $(document).ready(function () {
                 // alert(json[0].lat)
                 // getWeatherApi(json[0].lat, json[0].lon)
                 // alert(json[0].lon)
-            },
+            }},
             error: function(xhr, status, error) {
                 // Handle errors here
                 console.error(status, error);
@@ -132,10 +143,20 @@ $(document).ready(function () {
         
     }
     }
-    function displayForecast(lat,lon) {
+    $("#search-button").click(function(element){
+        // var key = $(this).parent();
+        // var container = $(this).parent();
+        // var containerId = container.attr("{cityName}");
+        // console.log("containerId", containerId);
+        // var savedText = key.children()[1].value
+        // container.textContent = savedText;
 
-        
-    }
+        //select the input in here 
+        // get the string that you searched for;  
+        var cityNameKey = document.getElementById("search-input").value;
+        localStorage.setItem(cityNameKey, []);
+    
 })
-// const APIkey = "43d3ce9a4d6be02e5f3dbc9ba49a17b0" 
+// const APIkey = "43d3ce9a4d6be02e5f3dbc9ba49a17b0"
 
+})

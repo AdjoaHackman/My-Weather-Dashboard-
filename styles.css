@@ -7,7 +7,21 @@ main {
 
 }
 
+.forecast-cards {
+    gap:15px;
+}
+
 
 .bg-forecast-cards {
-    background-color: goldenrod !important;
+    background-color: darkblue !important;
+    color: white;
+    text-align:left
+}
+
+.daily-icon {
+    width: 10%;
+}
+
+.forecast-icons {
+    width: 40% !important;
 }
