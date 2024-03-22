@@ -11,11 +11,11 @@
     <!-- added the script above because I kept getting a CORS error after I created a fetch and when I was checking my code in the console -->
 </head>
 
-<body class="container">
-    <nav class="nav-bar justify-content-center d-flex">
+<body>
+    <nav class="nav-bar justify-content-center d-flex bg-primary text-white">
         <h1> Weather Dashboard</h1>
     </nav>
-<main class="main-forecast d-flex">
+<div class="main-forecast d-flex">
     <div class="row col-4">
         <div class="container">
             <h3> Search for a City</h3>
@@ -25,28 +25,25 @@
             </div>
 
             <div class="city-buttons d-flex flex-column">
-                <button type="button" class="btn btn-primary mt-3" >New York</button>
+                <!-- <button type="button" class="btn btn-primary mt-3" >New York</button>
                 <button type="button" class="btn btn-primary mt-3">Los Angeles</button>
                 <button type="button" class="btn btn-primary mt-3">Chicago</button>
                 <button type="button" class="btn btn-primary mt-3">San Francisco</button>
                 <button type="button" class="btn btn-primary mt-3">Seattle</button>
                 <button type="button" class="btn btn-primary mt-3">Atlanta</button>
                 <button type="button" class="btn btn-primary mt-3">Houston</button>
-                <button type="button" class="btn btn-primary mt-3">Miami</button>
+                <button type="button" class="btn btn-primary mt-3">Miami</button> -->
             </div>
         </div>
     </div>
     <div class="forecast container-lg col-8">
-        <div class="single-day d-flex flex-row margin-top shadow-lg p-3 mb-5 bg-body rounded">
-            
+        <div class="single-day d-flex flex-row p-1 mb-5">   
         </div>
-        <div class="container">
             <h2>5-Day Forecast</h2>
-        </div>
         <div class="forecast-cards d-flex flex-md-row">
         </div>
     </div>
-</main>
+</div>
 
     <!-- <div>
         <div class="forecast col-8">
